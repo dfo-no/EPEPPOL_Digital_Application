@@ -1,0 +1,44 @@
+.hbox-style {
+    -fx-spacing: 10;
+	-fx-alignment : center-left;
+	-fx-min-height : 30;
+	-fx-pref-height : 30;
+}
+
+.label-style {
+	-fx-pref-width : 180;
+	-fx-min-width : 150;
+}
+
+.label-styleSFTP {
+	-fx-pref-width : 80;
+	-fx-min-width : 50;
+}
+
+.label-styleDIR {
+	-fx-pref-width : 150;
+	-fx-min-width : 150;
+}
+
+.warningLabel {
+	-fx-text-fill: #C0C0C0;
+}
+
+.log-style {
+	-fx-pref-width : 1800;
+	-fx-min-width : 800;
+	-fx-min-height : 600;
+	-fx-background-color:grey ;
+	
+}
+.text-area .content {
+
+
+   -fx-background-color: #E0E0E0 ;
+
+
+}
+
+
+
+
