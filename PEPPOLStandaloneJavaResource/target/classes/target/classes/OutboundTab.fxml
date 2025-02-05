@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+
+<ScrollPane 
+	  xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.dfo.gui.controller.SBDUnpack">
+<VBox >
+	  
+	  
+	<padding>
+		<Insets bottom="20" left="20" right="20" top="20" />
+	</padding>
+	
+	<children>
+		<HBox styleClass="hbox-style">
+			<children>
+			
+				<Label styleClass="label-style" text="File to decrypt" />
+				<Button fx:id="SBDfileSelectButton" mnemonicParsing="false" text="Select file..." />
+				<Label fx:id="fileForSigning" styleClass="label-style" text="no file selected" />
+				<Label styleClass="warningLabel"  text="Select SBD File with Base64 encoded content "  />
+			</children>
+			
+		</HBox>
+		<HBox styleClass="hbox-style">
+			
+			<children>
+				<Label styleClass="label-style" text="Decryption Keystore" />
+				<Button fx:id="DecryptionKeystore" mnemonicParsing="false" text="Select file..." />
+				<Label fx:id="fileForPKCSStore" styleClass="label-style" text="no file selected" />
+				<Label styleClass="warningLabel"  text="Select P12 Keystore for decryption of encrpyted Inner ASiC "  />
+			</children>
+		</HBox>
+		<HBox fx:id="DecryptPkcsPassword" styleClass="hbox-style" visible="true">
+			<children>
+				<Label styleClass="label-style" text="Keystore Alias/Password" />
+      			<TextField fx:id="AliasText" promptText="Decryption Alias"  />
+      			<PasswordField fx:id="pkcsPassword" promptText="Password"  />
+      			
+      			
+      			
+			</children>
+			
+			
+		</HBox>
+		<HBox styleClass="hbox-style">
+			<children>
+				<Label styleClass="label-style" text="ISO Output Path" />
+				<Button fx:id="DirectoryChooser" mnemonicParsing="false" text="Choose Path for Decrypted Package creation" />
+			</children>
+			
+		</HBox>
+		
+		
+		
+		
+		
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<HBox styleClass="hbox-style">
+			<children>
+				<Label styleClass="label-style" text="" />
+				<Button fx:id="signButton" mnemonicParsing="false" text="Decrypt" />
+				
+			</children>
+		</HBox>
+		<Label fx:id="warningLabel" styleClass="warningLabel" text="PEPPOL Inbound Logs" />	
+		<TextArea fx:id="LogTextAreaSBD" styleClass="log-style" />
+		
+		
+		
+			
+		
+
+		
+		
+      	
+	</children>
+	
+	
+</VBox>
+
+
+
+</ScrollPane>

@@ -5,7 +5,7 @@
 1. [Information](#Information)
 2. [Scope of Application](#ScopeofApplication)
 3. [Requirement and How to run](#Requirement)
-4. [PEPPOL Digital Application module](#PEPPOLDigitalApplicationmodule)
+4. [EPEPPOL Digital Application module](#PEPPOLDigitalApplicationmodule)
 5. [Important Link](#ImportantLink)
 
 
@@ -17,13 +17,13 @@
 | -----------        | ----------- |
 | ASiC-e             | Associated Signature Containers – extended     |
 | PEPPOL             | Pan-European Public Procurement Online    |
-| SBDH               | Single Business Document Header   |
-| SBD                | Single Business Document  |
+| SBDH               | Standard Business Document Header   |
+| SBD                | Standard Business Document  |
 | SHA             | Secure Hash Algorithm   |
 | BCP             | Business Certificate  Publisher   |
-| BCL             | Business Certificate Locatior    |
+| BCL             | Business Certificate Locator    |
 | OCSP             | Online Certificate Status Protocol    |
-| BCL             | Business Certificate Locatior    |
+
 
   
 
@@ -31,7 +31,7 @@
 
 ## Information
 
-PEPPOL Standalone application is designed to demonstrate enhPEPPOL funcionality which is required as a security constraints , below are some functionality included in the application.
+EPEPPOL Standalone application is designed to demonstrate ePEPPOL funcionality which is required as a security constraints , below are some functionality included in the application.
 
 <a name="ScopeofApplication"></a>
 ## **Scope of Application**
@@ -53,12 +53,12 @@ PEPPOL Standalone application is designed to demonstrate enhPEPPOL funcionality 
     4. Content decryption.
     
 ## **Design**
-### PEPPOL Outbound High Level
+### EPEPPOL Outbound High Level
 
 ![PEPPOL High Level](Resource/PEPPOL_HighLevel.png) 
 
 ### PEPPOL ASiC-e Structure
-PEPPOL ASiC-e Container consist of inner asice,outer asice and both these asice are packed as Base64 encoded content inside SBD.xml file.
+EPEPPOL ASiC-e Container consist of inner asice,outer asice and both these asice are packed as Base64 encoded content inside SBD.xml file.
 ![PEPPOL High Level](Resource/Package_Structure.png ) 
 
 ### PEPPOL Digital Application Outbound
@@ -67,10 +67,17 @@ EPEPPOL Digital Application outbound provides interface to create SBD Package co
  Input = ISO XML File
 
  Output= SBD XML Package
+
+ ##### For Demo Usage of application : Select "Use demo certificate for Signing and Encryption" on Create SBD Tab.
+  Above selection will 
+  1. Select default Test ISO File for asice packaging.
+  2. Select default  Keystore for encryption and signing.
+  
+  Select Outbound folder for the package storage by user.
  
 ![PEPPOL High Level](Resource/EPEPPOLDigAPPOutbound.png ) 
 
-### PEPPOL Digital Application Inbound
+### EPEPPOL Digital Application Inbound
 EPEPPOL Digital Application inbound provides interface to get ISO XML file from encrpyted SBD package using private key with which SBD file was encrpyted.
 
 Input =SBD XML Package
@@ -81,17 +88,17 @@ Output= ISO XML File
 
 <a name="Requirement"></a>
 ## Requirement and Steps to run application
- 1. PEPPOL Digital application is standalone application which does not require any server to run the application.
+ 1. EPEPPOL Digital application is standalone application which does not require any server to run the application.
  2. Application minimum requirement is Java 1.8..
     ### Steps to run application
-    1. Download PEPPOL_Digital_Application_Run.zip
+    1. Download EPEPPOL_Digital_Application_Run.zip
     2. Unzip directory.
     3. Run Application.bat
 
    
 
 <a name="PEPPOLDigitalApplicationmodule"></a>
-## PEPPOL Digital Application module 
+## EPEPPOL Digital Application module 
 
 1. **no.dfo.peppol.outbound.PeppolOutbound.java**: Outbound / SBD File creation process starts from here . Calls other java classes for processing file like Zipping,Base64 encoding , signing,encryption etc.
 
@@ -280,6 +287,7 @@ Supported algorithm :
 
 ## **Resources**
 1. Demo KeyStore : [PEPPOLStandalone/resources/DemoKeys.p12](PEPPOLStandalone/resources/DemoKeys.p12) 
+(keystore password="123456", signing key alias="demosign", encryption key alias="demoenc")
 2. Test ISO File : [Resource/TestFiles/ISO_Test_File.xml](Resource/TestFiles/ISO_Test_File.xml)
 3. SBD File : [Resource/TestFiles/SBD_Package/986252932_920058817_15012025171826129_ISO_Test_File.xml](Resource/TestFiles/SBD_Package/986252932_920058817_15012025171826129_ISO_Test_File.xml)
 4. Inner ASiC-e Zip container:[Resource/TestFiles/SBD_Package/ISO_Test_File.xml_inner.zip](Resource/TestFiles/SBD_Package/ISO_Test_File.xml_inner.zip)
@@ -292,12 +300,15 @@ Supported algorithm :
 | DSS Application Document PDF           | [Digital Signature Service](https://ec.europa.eu/digital-building-blocks/DSS/webapp-demo/doc/dss-documentation.pdf)       |
 | DSS Application Git Hub repository     | [GitHub - esig/dss-demonstrations: Examples of DSS integration](https://github.com/esig/dss-demonstrations)       |
 | DSS WebApp                             | [DSS Demonstration WebApp](https://ec.europa.eu/digital-building-blocks/DSS/webapp-demo/sign-a-document)         |
-| PEPPOL Rulebook                        |  [Rulebook](https://anskaffelser.dev/payment/g1/docs/current/rulebook/)           |
-| PEPPOL Security Requirement            | [Security requirements for secure file transactions](https://anskaffelser.dev/payment/g1/docs/current/security/)         |
+| EPEPPOL Rulebook                        |  [Rulebook](https://anskaffelser.dev/payment/g1/docs/current/rulebook/)           |
+| EPEPPOL Security Requirement            | [Security requirements for secure file transactions](https://anskaffelser.dev/payment/g1/docs/current/security/)         |
 | Use of (enhanced) PEPPOL eDelivery network   | [20170119 Use of PEPPOL eDelivery network for ISO 20022 v_1.pdf](https://anskaffelser.dev/payment/g1/files/20170119%20Use%20of%20PEPPOL%20eDelivery%20network%20for%20ISO%2020022%20v_1.pdf)                |
 
 
 
+## **Note**
+
+SFTP functionality to connect to host using username and password for uploading and downloading of files to and from sftp server will be enabled in upcoming version .
 
 > # Disclaimer
 DFØ is not responsible for any problems this application may cause for those who may use it, and users of the application are responsible for carrying out continuous security checks/scans while using this application.

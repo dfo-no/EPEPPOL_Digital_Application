@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/" xmlns="http://javafx.com/javafx/8">
+  <tabs>
+     <Tab fx:id="DemoSBDFileGeneratorTab" text="Create SBD">
+    
+    	<fx:include source="TestSBDGenerator.fxml"/>
+    	
+    </Tab>
+     <Tab fx:id="DecryptTab" text="Decrypt SBD">
+    
+    	<fx:include source="OutboundTab.fxml"/>
+    	
+    </Tab>
+    <Tab fx:id="OCSPTab" text="OCSP Check">
+    
+    	<fx:include source="OCPS.fxml"/>
+    	
+    </Tab>
+     <!-- <Tab fx:id="SFTPTab" text="SFTP AccessPoint">
+    
+    	<fx:include source="SFTP.fxml"/>
+    	
+    </Tab> -->
+  
+    <Tab fx:id="AboutUsTab" text="About us and How to ..">
+    
+    	<fx:include source="AboutUs.fxml"/>
+    	
+    </Tab>
+    
+    
+    
+    
+    
+  </tabs>
+</TabPane>
