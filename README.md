@@ -286,7 +286,7 @@ Supported algorithm :
 
 
 ## **Resources**
-1. Demo KeyStore : [PEPPOLStandalone/resources/DemoKeys.p12](PEPPOLStandalone/resources/DemoKeys.p12) 
+1. Demo KeyStore : [PEPPOLStandaloneJavaResource/resources/DemoKeys.p12](PEPPOLStandaloneJavaResource/resources/DemoKeys.p12) 
 (keystore password="123456", signing key alias="demosign", encryption key alias="demoenc")
 2. Test ISO File : [Resource/TestFiles/ISO_Test_File.xml](Resource/TestFiles/ISO_Test_File.xml)
 3. SBD File : [Resource/TestFiles/SBD_Package/986252932_920058817_15012025171826129_ISO_Test_File.xml](Resource/TestFiles/SBD_Package/986252932_920058817_15012025171826129_ISO_Test_File.xml)
