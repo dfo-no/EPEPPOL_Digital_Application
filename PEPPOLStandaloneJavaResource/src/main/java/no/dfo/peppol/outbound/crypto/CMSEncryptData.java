@@ -26,9 +26,9 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.operator.OutputEncryptor;
 import org.bouncycastle.operator.jcajce.JcaAlgorithmParametersConverter;
 
-import CustomExceptionPEPPOL.PeppolGeneralExceptions;
 import no.dfo.gui.controller.UtilityValuesGUI;
 import no.dfo.peppol.outbound.UtilityValueSetting;
+import no.dfo.peppol.peppolcustomexception.PeppolGeneralExceptions;
 
 public class CMSEncryptData {
 	UtilityValuesGUI uvg;

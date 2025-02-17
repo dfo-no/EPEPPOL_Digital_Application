@@ -30,9 +30,9 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.Region;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import logger.MyLogger;
 import no.dfo.peppol.PEPPOLStandalone.Main;
 import no.dfo.peppol.inbound.inboundMain.PeppolInbound;
+import no.dfo.peppol.logger.MyLogger;
 import no.dfo.peppol.outbound.PeppolOutbound;
 
 public class SFTPGuiMain implements Initializable {

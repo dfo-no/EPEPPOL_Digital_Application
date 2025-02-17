@@ -1,41 +1,67 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>no.dfo.peppol</groupId>
-	<artifactId>PEPPOLStandalone</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>PEPPOLStandalone</name>
+	<groupId>com.dfo.epeppolstandalone</groupId>
+	<artifactId>dfo-peppol-standalone</artifactId>
+	<version>v1.0.0</version>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
+		<junit.version>5.10.2</junit.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>23</maven.compiler.source>
+		<maven.compiler.target>23</maven.compiler.target>
 		<dss.version>6.2.RC1</dss.version>
+		<bouncycastle.version>1.76</bouncycastle.version>
+		<javafx.version>17</javafx.version>
+		<jakarta.xmlbind.version>3.0.1</jakarta.xmlbind.version>
+		<jakarta.activation.version>2.0.1</jakarta.activation.version>
+		<jaxb.version>3.0.2</jaxb.version>
 	</properties>
+
 	<dependencies>
+
+
 		<dependency>
 			<groupId>org.openjfx</groupId>
-			<artifactId>javafx-maven-plugin</artifactId>
-			<version>0.0.8</version>
+			<artifactId>javafx-controls</artifactId>
+			<version>${javafx.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-fxml</artifactId>
+			<version>${javafx.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 			<version>20240303</version>
 		</dependency>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.11</version>
-			<scope>test</scope>
-		</dependency>
-		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-api</artifactId> 
-			<version>2.0.7</version> </dependency> -->
-		<dependency>
 			<groupId>eu.europa.ec.joinup.sd-dss</groupId>
 			<artifactId>dss-service</artifactId>
 			<version>${dss.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.jcraft/jsch -->
 		<dependency>
@@ -46,13 +72,13 @@
 		<dependency>
 			<groupId>org.bouncycastle</groupId>
 			<artifactId>bcprov-jdk18on</artifactId>
-			<version>1.76</version>
+			<version>${bouncycastle.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>eu.europa.ec.joinup.sd-dss</groupId>
-			<artifactId>dss-utils</artifactId>
-			<version>${dss.version}</version>
-		</dependency>
+		<!--<dependency>
+            <groupId>eu.europa.ec.joinup.sd-dss</groupId>
+            <artifactId>dss-utils</artifactId>
+            <version>${dss.version}</version>
+        </dependency>-->
 		<dependency>
 			<groupId>eu.europa.ec.joinup.sd-dss</groupId>
 			<artifactId>dss-utils-apache-commons</artifactId>
@@ -61,7 +87,7 @@
 		<dependency>
 			<groupId>org.bouncycastle</groupId>
 			<artifactId>bcpkix-jdk18on</artifactId>
-			<version>1.76</version>
+			<version>${bouncycastle.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -73,8 +99,7 @@
 			<artifactId>dss-enumerations</artifactId>
 			<version>${dss.version}</version>
 		</dependency>
-		<!-- <dependency> <groupId>eu.europa.ec.joinup.sd-dss</groupId> <artifactId>dss-alert</artifactId> 
-			<version>${dss.version}</version> </dependency> -->
+
 		<dependency>
 			<groupId>eu.europa.ec.joinup.sd-dss</groupId>
 			<artifactId>dss-asic-cades</artifactId>
@@ -85,17 +110,20 @@
 			<artifactId>dss-asic-common</artifactId>
 			<version>${dss.version}</version>
 		</dependency>
-		<!-- <dependency> <groupId>eu.europa.ec.joinup.sd-dss</groupId> <artifactId>dss-cades</artifactId> 
-			<version>${dss.version}</version> </dependency> -->
+		<!--  <dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<type>pom</type>
+				<version>3.4.1</version>
+				<scope>import</scope>
+			</dependency>-->
+
 		<dependency>
 			<groupId>eu.europa.ec.joinup.sd-dss</groupId>
 			<artifactId>dss-document</artifactId>
 			<version>${dss.version}</version>
 		</dependency>
-		<!-- <dependency> <groupId>eu.europa.ec.joinup.sd-dss</groupId> <artifactId>dss-jaxb-common</artifactId> 
-			<version>${dss.version}</version> </dependency> -->
-		<!-- <dependency> <groupId>eu.europa.ec.joinup.sd-dss</groupId> <artifactId>dss-jaxb-parsers</artifactId> 
-			<version>${dss.version}</version> </dependency> -->
+
 		<dependency>
 			<groupId>eu.europa.ec.joinup.sd-dss</groupId>
 			<artifactId>dss-model</artifactId>
@@ -111,81 +139,117 @@
 			<artifactId>dss-token</artifactId>
 			<version>${dss.version}</version>
 		</dependency>
-		<!-- <dependency> <groupId>eu.europa.ec.joinup.sd-dss</groupId> <artifactId>validation-policy</artifactId> 
-			<version>${dss.version}</version> </dependency> -->
+		<!--
+		https://mvnrepository.com/artifact/jakarta.activation/jakarta.activation-api -->
+		<dependency>
+			<groupId>jakarta.activation</groupId>
+			<artifactId>jakarta.activation-api</artifactId>
+			<version>${jakarta.activation.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
+			<version>${jakarta.xmlbind.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.glassfish.jaxb/jaxb-core -->
+		<dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-core</artifactId>
+			<version>${jaxb.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.glassfish.jaxb/jaxb-runtime -->
+		<dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+			<version>${jaxb.version}</version>
+		</dependency>
+
+
 	</dependencies>
+
+
 	<build>
-		
-			<plugins>
-				<plugin>
-					<artifactId>maven-dependency-plugin</artifactId>
-					<version>3.1.2</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
-					<configuration>
-						<archive>
-							<manifest>
-								<mainClass>no.dfo.peppol.PEPPOLStandalone.Main</mainClass>
-							</manifest>
-						</archive>
-					</configuration>
-				</plugin>
-				<!-- <plugin> <groupId>org.openjfx</groupId> <artifactId>javafx-maven-plugin</artifactId> 
-					<version>0.0.8</version> <configuration> <mainClass>no.dfo.peppol.PEPPOLStandalone.Main</mainClass> 
-					</configuration> </plugin> -->
-				<!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
-				<plugin>
-					<artifactId>maven-clean-plugin</artifactId>
-					<version>3.1.0</version>
-				</plugin>
-				<!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
-				<plugin>
-					<artifactId>maven-resources-plugin</artifactId>
-					<version>3.0.2</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.8.0</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.22.1</version>
-				</plugin>
-				<!-- <plugin> <artifactId>maven-jar-plugin</artifactId> <version>3.0.2</version> 
-					</plugin> -->
-				<plugin>
-					<artifactId>maven-install-plugin</artifactId>
-					<version>2.5.2</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-deploy-plugin</artifactId>
-					<version>2.8.2</version>
-				</plugin>
-				<!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
-				<plugin>
-					<artifactId>maven-site-plugin</artifactId>
-					<version>3.7.1</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-project-info-reports-plugin</artifactId>
-					<version>3.0.0</version>
-				</plugin>
-				<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>jaxb2-maven-plugin</artifactId> 
-					<version>2.2</version> <executions> <execution> <goals> <goal>xjc</goal> 
-					</goals> </execution> </executions> <configuration> <sources> <source>src/main/resources/your_schema.xsd</source> 
-					</sources> <xjbSources> <xjbSource>src/main/resources/bindings.xjb</xjbSource> 
-					</xjbSources> <packageName>some_package</packageName> <outputDirectory>src/main/java</outputDirectory> 
-					<clearOutputDir>false</clearOutputDir> <generateEpisode>false</generateEpisode> 
-					<noGeneratedHeaderComments>true</noGeneratedHeaderComments> </configuration> 
-					</plugin> -->
-			</plugins>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<mainClass>no.dfo.peppol.PEPPOLStandalone.RunMain</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+
+		</plugins>
+
 		<resources>
 			<resource>
-				<directory>resources</directory>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
 			</resource>
 		</resources>
-		</build>
-		
+	</build>
+
+	<profiles>
+		<profile>
+			<id>jdk19-plus</id>
+			<activation>
+				<jdk>[9,)</jdk>
+			</activation>
+
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-assembly-plugin</artifactId>
+						<configuration>
+							<archive>
+								<manifest>
+									<mainClass>
+										no.dfo.peppol.PEPPOLStandalone.RunMain</mainClass>
+								</manifest>
+							</archive>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+						</configuration>
+					</plugin>
+					<plugin>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<configuration>
+							<source>23</source>
+							<target>23</target>
+
+							<!-- jdk.crypto.cryptoki : SunPKCS11 -->
+							<compilerArgs>
+								<arg>--add-modules</arg>
+								<arg>jdk.crypto.cryptoki</arg>
+
+								<arg>--add-exports</arg>
+								<arg>
+									jdk.crypto.cryptoki/sun.security.pkcs11.wrapper=ALL-UNNAMED</arg>
+
+								<!-- Reflection at runtime -->
+								<arg>--add-opens</arg>
+								<arg>
+									jdk.crypto.cryptoki/sun.security.pkcs11=ALL-UNNAMED</arg>
+							</compilerArgs>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<argLine>--add-modules jdk.crypto.cryptoki</argLine>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+
 </project>

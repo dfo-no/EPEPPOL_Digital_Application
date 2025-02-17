@@ -22,6 +22,7 @@ import eu.europa.esig.dss.model.DSSException;
 import eu.europa.esig.dss.model.SignatureValue;
 import eu.europa.esig.dss.model.ToBeSigned;
 import eu.europa.esig.dss.model.x509.CertificateToken;
+import eu.europa.esig.dss.spi.validation.CommonCertificateVerifier;
 import no.dfo.gui.controller.UtilityValuesGUI;
 import no.dfo.peppol.outbound.UtilityValueSetting;
 
@@ -78,7 +79,7 @@ public class SignASiCwithCAdES {
 		Log.info("["+uv.getFilename()+"_"+uvg.getTimestamp()+"]"+"        Signature Algorithm Type=ECDSA ");
 
 		// Create common certificate verifier
-		eu.europa.esig.dss.spi.validation.CommonCertificateVerifier commonCertificateVerifier = new eu.europa.esig.dss.spi.validation.CommonCertificateVerifier();
+	CommonCertificateVerifier commonCertificateVerifier = new CommonCertificateVerifier();
 
 		// Create ASiC signature service
 		ASiCWithCAdESService service = new ASiCWithCAdESService(commonCertificateVerifier);

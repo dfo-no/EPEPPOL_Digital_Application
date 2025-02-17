@@ -2,10 +2,9 @@ package no.dfo.peppol.outbound.metadata;
 
 import java.io.StringWriter;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
 import no.dfo.gui.controller.UtilityValuesGUI;
 import no.dfo.peppol.outbound.UtilityValueSetting;
 

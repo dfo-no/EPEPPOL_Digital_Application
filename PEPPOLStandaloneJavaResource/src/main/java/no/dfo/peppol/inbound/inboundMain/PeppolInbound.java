@@ -33,10 +33,6 @@ import org.apache.commons.io.IOUtils;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
-import CustomExceptionPEPPOL.DecryptionError;
-import CustomExceptionPEPPOL.PeppolGeneralExceptions;
-import CustomExceptionPEPPOL.SBDHError;
-import CustomExceptionPEPPOL.SignatureValidationErrorInner;
 import no.dfo.gui.controller.UtilityValuesGUI;
 import no.dfo.peppol.common.functions.CommonFunction;
 import no.dfo.peppol.common.functions.KeystoreManager;
@@ -45,6 +41,10 @@ import no.dfo.peppol.inbound.signverification.SignatureVerifier;
 import no.dfo.peppol.outbound.UtilityValueSetting;
 import no.dfo.peppol.outbound.asicmanifestreader.AsicManifestReader;
 import no.dfo.peppol.outbound.asicmanifestreader.CalculateHash;
+import no.dfo.peppol.peppolcustomexception.DecryptionError;
+import no.dfo.peppol.peppolcustomexception.PeppolGeneralExceptions;
+import no.dfo.peppol.peppolcustomexception.SBDHError;
+import no.dfo.peppol.peppolcustomexception.SignatureValidationErrorInner;
 
 public class PeppolInbound {
 	Logger Log;

@@ -91,9 +91,11 @@ Output= ISO XML File
  1. EPEPPOL Digital application is standalone application which does not require any server to run the application.
  2. Application minimum requirement is Java 1.8..
     ### Steps to run application
-    1. Download EPEPPOL_Digital_Application_Run.zip
+    1. Download EPEPPOL_Digital_Application_Run.zip from github release tag EPEPPOL_Digital_Application-v1.0.0
     2. Unzip directory.
     3. Run Application.bat
+
+    *OpenJDK 23 is supplied with the application in which the application is built.
 
    
 

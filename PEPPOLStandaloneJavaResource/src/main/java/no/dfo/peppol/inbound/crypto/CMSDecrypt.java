@@ -15,7 +15,7 @@ import org.bouncycastle.cms.RecipientInformation;
 import org.bouncycastle.cms.jcajce.JceKeyTransEnvelopedRecipient;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
-import CustomExceptionPEPPOL.DecryptionError;
+import no.dfo.peppol.peppolcustomexception.DecryptionError;
 
 public class CMSDecrypt {
 

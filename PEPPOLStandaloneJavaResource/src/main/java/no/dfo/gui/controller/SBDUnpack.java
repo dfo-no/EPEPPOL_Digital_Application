@@ -30,8 +30,8 @@ import javafx.scene.layout.Region;
 import javafx.stage.FileChooser;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
-import logger.MyLogger;
 import no.dfo.peppol.inbound.inboundMain.PeppolInbound;
+import no.dfo.peppol.logger.MyLogger;
 
 public class SBDUnpack implements Initializable {
 	protected Stage stage;

@@ -1,6 +1,0 @@
-Manifest-Version: 1.0
-Built-By: 0-gabi
-Build-Jdk: 17.0.11
-Main-Class: no.dfo.peppol.PEPPOLStandalone.Main
-Created-By: Maven Integration for Eclipse
-

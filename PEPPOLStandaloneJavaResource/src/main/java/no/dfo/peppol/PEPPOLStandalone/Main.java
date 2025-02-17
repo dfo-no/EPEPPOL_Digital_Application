@@ -28,6 +28,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import no.dfo.gui.controller.MainController;
 import no.dfo.gui.controller.OCSPMain;
 import no.dfo.gui.controller.SFTPGuiMain;
+
 public class Main extends Application {
 	private Stage stage;
 	
@@ -38,8 +39,9 @@ public class Main extends Application {
 		this.stage.setTitle("Digital PEPPOL Application");
 		this.stage.setResizable(true);
 
-		this.stage.getIcons().add(new Image("/dfo_symbol_pos_rgb_large.png"));
-
+		//this.stage.getIcons().add(new Image("/dfo_symbol_pos_rgb_large.png"));
+		
+		this.stage.getIcons().add(new Image(Main.class.getResource("/dfo_symbol_pos_rgb_large.png").toURI().toString()));
 		initLayout();
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 		       @Override
@@ -57,14 +59,16 @@ public class Main extends Application {
 	
 	private void initLayout() {
 		try {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Main.class.getResource("/Application.fxml"));
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/Application.fxml"));
+		//	loader.setLocation(Main.class.getResource("/Application.fxml"));
+
+			URL url = RunMain.class.getResource("/style.css");
 			
 			//TabPane pane = loader.load();
 			TabPane view = loader.load();
 			
 			Scene scene = new Scene(view, 1050, 420);
-			scene.getStylesheets().add("/style.css");
+			scene.getStylesheets().add(url.toExternalForm());
 			stage.setScene(scene);
 			stage.show();
 

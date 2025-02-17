@@ -26,11 +26,11 @@ import javafx.scene.layout.Region;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import logger.MyLogger;
 import no.dfo.peppol.PEPPOLStandalone.Main;
 import no.dfo.peppol.common.ocsp.OCSPLookupApp;
 import no.dfo.peppol.common.ocsp.UtilityValueOCSP;
 import no.dfo.peppol.inbound.inboundMain.PeppolInbound;
+import no.dfo.peppol.logger.MyLogger;
 
 public class OCSPMain implements Initializable{
 	private Stage stage;

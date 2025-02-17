@@ -2,6 +2,9 @@ package no.dfo.peppol.common.functions;
 
 
 
+
+import no.dfo.peppol.PEPPOLStandalone.RunMain;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -34,7 +37,8 @@ public class KeystoreManager {
 		try{
 			is=new FileInputStream(keystoreName);
 		}catch(FileNotFoundException fnNotFound) {
-			URL resource=getClass().getClassLoader().getResource("DemoKeys.p12");
+			URL resource= this.getClass().getResource("/DemoKeys.p12");
+			//URL resource=getClass().getClassLoader().getResource("DemoKeys.p12");
 			is1=resource.openStream();
 		}
 	}
@@ -49,7 +53,8 @@ public class KeystoreManager {
 					this.keystorePwd.toCharArray());
 			 privateKey = (PrivateKey) keystore.getKey(Alias, this.keystorePwd.toCharArray());
 		}catch(FileNotFoundException fnNotFound) {
-			URL resource=getClass().getClassLoader().getResource("DemoKeys.p12");
+			URL resource= this.getClass().getResource("/DemoKeys.p12");
+			//URL resource=getClass().getClassLoader().getResource("DemoKeys.p12");
 			is1= resource.openStream();
 			keystore = KeyStore.getInstance("PKCS12");
 			keystore.load(
@@ -79,7 +84,8 @@ public class KeystoreManager {
 					this.keystorePwd.toCharArray());
 			is.close();
 		}catch(FileNotFoundException fnNotFound) {
-			URL resource=getClass().getClassLoader().getResource("DemoKeys.p12");
+			URL resource= this.getClass().getResource("/DemoKeys.p12");
+			//URL resource=getClass().getClassLoader().getResource("DemoKeys.p12");
 			is1=resource.openStream();
 			keyStore = KeyStore.getInstance("PKCS12");
 			// Provide password for access
@@ -105,7 +111,8 @@ public class KeystoreManager {
 		
 	is.close();
 	}catch(FileNotFoundException fnNotFound) {
-		URL resource=getClass().getClassLoader().getResource("DemoKeys.p12");
+		URL resource= this.getClass().getResource("/DemoKeys.p12");
+		//URL resource=getClass().getClassLoader().getResource("DemoKeys.p12");
 		is1= resource.openStream();
 		keystore.load(is1 ,
 				this.keystorePwd.toCharArray());

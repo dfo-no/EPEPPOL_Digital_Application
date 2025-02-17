@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -16,29 +15,22 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.xml.bind.JAXBException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.apache.commons.io.FileUtils;
-import org.bouncycastle.util.io.pem.PemGenerationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import CustomExceptionPEPPOL.PeppolGeneralExceptions;
-import CustomExceptionPEPPOL.SignatureValidationErrorInner;
-import CustomExceptionPEPPOL.SignatureValidationErrorOuter;
-import CustomExceptionPEPPOL.SigningError;
-import eu.europa.esig.dss.enumerations.MimeType;
 import eu.europa.esig.dss.model.DSSDocument;
 import eu.europa.esig.dss.model.InMemoryDocument;
+import jakarta.xml.bind.JAXBException;
 import no.dfo.gui.controller.UtilityValuesGUI;
 import no.dfo.peppol.common.functions.KeystoreManager;
 import no.dfo.peppol.common.functions.MimeTypeEnum;
@@ -48,6 +40,8 @@ import no.dfo.peppol.outbound.crypto.CMSEncryptData;
 import no.dfo.peppol.outbound.metadata.CreateMetadata;
 import no.dfo.peppol.outbound.sbdh.SBDHCreation;
 import no.dfo.peppol.outbound.signing.SignASiCwithCAdES;
+import no.dfo.peppol.peppolcustomexception.PeppolGeneralExceptions;
+import no.dfo.peppol.peppolcustomexception.SigningError;
 
 public class PeppolOutbound {
 	public static UtilityValueSetting uv;

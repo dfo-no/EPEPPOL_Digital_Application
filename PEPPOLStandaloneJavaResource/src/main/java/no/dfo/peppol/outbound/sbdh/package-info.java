@@ -5,5 +5,5 @@
 // Generated on: 2023.08.26 at 01:26:47 PM UTC 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@jakarta.xml.bind.annotation.XmlSchema(namespace = "http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader", elementFormDefault = jakarta.xml.bind.annotation.XmlNsForm.QUALIFIED)
 package no.dfo.peppol.outbound.sbdh;

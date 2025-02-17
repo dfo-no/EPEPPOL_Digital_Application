@@ -69,7 +69,7 @@ public class ASiCEwithCAdES {
 			parameters.setCertificateChain(keyEntry.getCertificateChain());
 
 			// Create common certificate verifier
-			CommonCertificateVerifier commonCertificateVerifier = new CommonCertificateVerifier();
+		CommonCertificateVerifier commonCertificateVerifier = new CommonCertificateVerifier();
 
 			// Create ASiC service for signature
 			ASiCWithCAdESService service = new ASiCWithCAdESService(commonCertificateVerifier);

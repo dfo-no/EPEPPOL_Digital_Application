@@ -10,9 +10,9 @@ import org.bouncycastle.cms.SignerInformationStore;
 import org.bouncycastle.cms.jcajce.JcaSimpleSignerInfoVerifierBuilder;
 import org.bouncycastle.util.Store;
 
-import CustomExceptionPEPPOL.SignatureValidationErrorInner;
-import CustomExceptionPEPPOL.SignatureValidationErrorOuter;
 import no.dfo.peppol.common.functions.BCHelper;
+import no.dfo.peppol.peppolcustomexception.SignatureValidationErrorInner;
+import no.dfo.peppol.peppolcustomexception.SignatureValidationErrorOuter;
 /**
  * @author erlend
  */

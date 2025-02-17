@@ -1,16 +1,19 @@
 package no.dfo.gui.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.commons.collections4.functors.NullIsExceptionPredicate;
 import org.apache.commons.io.FileUtils;
 
 import eu.europa.esig.dss.enumerations.DigestAlgorithm;
@@ -36,7 +39,8 @@ import javafx.scene.layout.Region;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import logger.MyLogger;
+import no.dfo.peppol.PEPPOLStandalone.Main;
+import no.dfo.peppol.logger.MyLogger;
 import no.dfo.peppol.outbound.PeppolOutbound;
 import no.dfo.peppol.outbound.UtilityValueSetting;
 
@@ -137,7 +141,11 @@ public class DemoTestFileGeneratorGUI implements Initializable {
 	String hashAlgorithm = "";
 	String encCertInputType = "";
 	String bclEnv = "";
+	
+	DemoUtilityValues demoValues;
+	
 
+	
 	
 
 	static {
@@ -153,6 +161,13 @@ public class DemoTestFileGeneratorGUI implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+	
+		try {
+			demoValues=new DemoUtilityValues();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		uv = new UtilityValueSetting();
 
 		LogTextAreaSBD.clear();
@@ -237,15 +252,20 @@ public class DemoTestFileGeneratorGUI implements Initializable {
 
 					certUsageCategory = (String) newValue.getUserData();
 					if (certUsageCategory.equalsIgnoreCase("DemoStore")) {
-						ISOXMLFileSelectionButton.setDisable(true);
 						
-						InputStream is1=null ;
-						URL resource=getClass().getClassLoader().getResource("ISO_Test_File.xml");
+						ISOXMLFileSelectionButton.setDisable(true);
+
+						InputStream is1 = null;
+
+						URL resource = this.getClass().getResource("/ISO_Test_File.xml");
+						// URL resource=getClass().getClassLoader().getResource("ISO_Test_File.xml");
 						try {
-							InputStream ioStream = this.getClass().getClassLoader().getResourceAsStream("ISO_Test_File.xml");
-							File fo=new File("DemoTestFile.xml");
-						FileUtils.copyInputStreamToFile(ioStream,fo );
-							
+							// InputStream ioStream =
+							// this.getClass().getClassLoader().getResourceAsStream("ISO_Test_File.xml");
+							InputStream ioStream = resource.openStream();
+							File fo = new File("DemoTestFile.xml");
+							FileUtils.copyInputStreamToFile(ioStream, fo);
+
 							List<File> ISOContent = new ArrayList<File>();
 							ISOContent.add(fo);
 							uvg.setISOFiles(ISOContent);
@@ -264,8 +284,8 @@ public class DemoTestFileGeneratorGUI implements Initializable {
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
-						senderOrg.setText("986252932");
-						recieverOrg.setText("986252932");
+						senderOrg.setText(demoValues.getDemoOrgnaizationNumber());
+						recieverOrg.setText(demoValues.getDemoOrgnaizationNumber());
 						EncryptPkcsFile.setDisable(true);
 						EncryptPkcsPassword.setDisable(true);
 						SigntPkcsFile.setDisable(true);
@@ -276,6 +296,13 @@ public class DemoTestFileGeneratorGUI implements Initializable {
 						divisionIdentifier.setDisable(true);
 
 					} else {
+						AliasTextEnc.setText("");
+						AliasTextSign.setText("");
+						encpkcsPassword.setText("");
+						SignkcsPassword.setText("");
+						fileForPKCSStoreEnc.setText("");
+						fileForPKCSStoreSign.setText("");
+
 						ISOXMLFileSelectionButton.setDisable(false);
 						customerIdentifier.setDisable(false);
 						userIdentifier.setDisable(false);
@@ -369,91 +396,99 @@ public class DemoTestFileGeneratorGUI implements Initializable {
 			LogTextAreaSBD.clear();
 			uvg.setRecOrgFX(recieverOrg);
 			try {
-			if(uvg.getRepackPath().equalsIgnoreCase("") ||uvg.getRepackPath()==null ) {
-				throw new NullPointerException();
-				
-			}
-			
-			if (certUsageCategory.equalsIgnoreCase("DemoStore")) {
-
-				uvg.setSignKeystorePath("DemoKeys.p12");
-				uvg.setEncKeystorePath("DemoKeys.p12");
-				uvg.setSignkeystorePwd("123456");
-				uvg.setEnckeystorePwd("123456");
-				uvg.setAliasSign("demosign");
-				uvg.setAliasEnc("demoenc");
-				uvg.setSenderOrg("986252932");
-				uvg.setRecOrg("986252932");
-				uv.setCertUsed("DEMO");
-				uvg.setEncCertInputType("demo");
-				userIdentifier.setText("Dummy_User_Identifier");
-				customerIdentifier.setText("Dummy_Customer_Identifier");
-				divisionIdentifier.setText("Dummy_Division_Identifier");
-
-			} else {
-				if (userIdentifier.getText() == null || userIdentifier.getText().equalsIgnoreCase("")) {
-					userIdentifier.setText("Dummy_User_Identifier");
+				if (uvg.getRepackPath() == null) {
+					System.out.println("Exception Success");
+					throw new NullPointerException("Please select output folder for SBD Package");
 
 				}
-				if (customerIdentifier.getText() == null || customerIdentifier.getText().equalsIgnoreCase("")) {
-					customerIdentifier.setText("Dummy_Customer_Identifier");
-				}
-				if (divisionIdentifier.getText() == null || divisionIdentifier.getText().equalsIgnoreCase("")) {
-					divisionIdentifier.setText("Dummy_Division_Identifier");
-				}
 
-				uvg.setSignkeystorePwd(SignkcsPassword.getText());
-				uvg.setAliasSign(AliasTextSign.getText());
-				if (senderOrg.getText() == null || senderOrg.getText().equalsIgnoreCase("")) {
-					senderOrg.setText("986252932");
-
+				if (certUsageCategory.equalsIgnoreCase("DemoStore")) {
+					uvg.setSignKeystorePath(demoValues.getDemoKeystorePath());
+					uvg.setEncKeystorePath(demoValues.getDemoKeystorePath());
+					uvg.setSignkeystorePwd(demoValues.getDemoKeystorePassword());
+					uvg.setEnckeystorePwd(demoValues.getDemoKeystorePassword());
+					uvg.setAliasSign(demoValues.getDemoSignKeystoreAlias());
+					uvg.setAliasEnc(demoValues.getDemoEncKeystoreAlias());
+					uvg.setSenderOrg(demoValues.getDemoOrgnaizationNumber());
+					uvg.setRecOrg(demoValues.getDemoOrgnaizationNumber());
+					uv.setCertUsed("DEMO");
+					uvg.setEncCertInputType("demo");
+					userIdentifier.setText(demoValues.getUserIdentifier());
+					customerIdentifier.setText(demoValues.getCustomerIdentifier());
+					divisionIdentifier.setText(demoValues.getDivisionIdentifier());
 				} else {
+					if (userIdentifier.getText() == null || userIdentifier.getText().equalsIgnoreCase("")) {
+						userIdentifier.setText(demoValues.getUserIdentifier());
+
+					}
+					if (customerIdentifier.getText() == null || customerIdentifier.getText().equalsIgnoreCase("")) {
+						customerIdentifier.setText(demoValues.getCustomerIdentifier());
+					}
+					if (divisionIdentifier.getText() == null || divisionIdentifier.getText().equalsIgnoreCase("")) {
+						divisionIdentifier.setText(demoValues.getDivisionIdentifier());
+					}
+
+					if (uvg.getP12SignStore() == null) {
+						Alert alert = new Alert(AlertType.ERROR, "Signing Keystore cannot be null", ButtonType.OK);
+						alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+						alert.showAndWait();
+						logger.log(Level.WARNING, "Select Signing keystore for signing");
+						throw new NullPointerException("Signing Keystore cannot be null");
+
+					}
+
+					uvg.setSignkeystorePwd(SignkcsPassword.getText());
+					uvg.setAliasSign(AliasTextSign.getText());
+					if (senderOrg.getText() == null || senderOrg.getText().equalsIgnoreCase("")) {
+						senderOrg.setText(demoValues.getDemoOrgnaizationNumber());
+
+					} else {
+
+					}
+					if (recieverOrg.getText() == null || recieverOrg.getText().equalsIgnoreCase("")) {
+						recieverOrg.setText(demoValues.getDemoOrgnaizationNumber());
+
+					}
+
+					uvg.setSenderOrg(senderOrg.getText());
+					uvg.setRecOrg(recieverOrg.getText());
+					uv.setCertUsed("User");
+
+					if (encCertInputType.equalsIgnoreCase("EncryptionKeyStore")) {
+						uvg.setEnckeystorePwd(encpkcsPassword.getText());
+						System.out.println(encpkcsPassword.getText());
+
+						System.out.println(AliasTextEnc.getText());
+						uvg.setAliasEnc(AliasTextEnc.getText());
+						uvg.setEncCertInputType("EncryptionKeyStore");
+					} else if (encCertInputType.equalsIgnoreCase("X509Certificate")) {
+						uvg.setEncCertInputType("X509Certificate");
+					} else if (encCertInputType.equalsIgnoreCase("BCLDownload")) {
+						uvg.setEncCertInputType("BCLDownload");
+					}
 
 				}
-				if (recieverOrg.getText() == null || recieverOrg.getText().equalsIgnoreCase("")) {
-					recieverOrg.setText("986252932");
+				uvg.setDivisionIdentifier(divisionIdentifier.getText());
+				uvg.setCustomerIdentfier(customerIdentifier.getText());
+				uvg.setUserIdentifier(userIdentifier.getText());
+				PeppolOutbound po = new PeppolOutbound(uv);
+				try {
+					po.PEPPOL_Outbound(uvg);
+				} catch (Exception e) {
+					logger.log(Level.SEVERE, "Error :" + e.toString());
 
+					e.printStackTrace();
 				}
+			} catch (NullPointerException E) {
 
-				uvg.setSenderOrg(senderOrg.getText());
-				uvg.setRecOrg(recieverOrg.getText());
-				uv.setCertUsed("User");
+				Alert alert = new Alert(AlertType.ERROR, E.getMessage(), ButtonType.OK);
 
-				if (encCertInputType.equalsIgnoreCase("EncryptionKeyStore")) {
-					uvg.setEnckeystorePwd(encpkcsPassword.getText());
-					System.out.println(encpkcsPassword.getText());
-					
-					System.out.println(AliasTextEnc.getText());
-					uvg.setAliasEnc(AliasTextEnc.getText());
-					uvg.setEncCertInputType("EncryptionKeyStore");
-				} else if (encCertInputType.equalsIgnoreCase("X509Certificate")) {
-					uvg.setEncCertInputType("X509Certificate");
-				} else if (encCertInputType.equalsIgnoreCase("BCLDownload")) {
-					uvg.setEncCertInputType("BCLDownload");
-				}
+				alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+
+				alert.showAndWait();
+				logger.log(Level.WARNING, E.getMessage());
 
 			}
-			uvg.setDivisionIdentifier(divisionIdentifier.getText());
-			uvg.setCustomerIdentfier(customerIdentifier.getText());
-			uvg.setUserIdentifier(userIdentifier.getText());
-			PeppolOutbound po = new PeppolOutbound(uv);
-			try {
-				po.PEPPOL_Outbound(uvg);
-			} catch (Exception e) {
-				logger.log(Level.SEVERE, "Error :"+e.toString());
-				
-				e.printStackTrace();
-			}
-		}catch(NullPointerException E) {
-			
-			  Alert alert = new Alert(AlertType.ERROR,
-			  "Please select output folder for SBD Package",
-			  ButtonType.OK); alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-			  alert.showAndWait(); 
-			  logger.log(Level.WARNING,
-			  "Please select output folder for SBD Package");
-			 
-		}
 		});
 
 	}
