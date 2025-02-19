@@ -294,6 +294,7 @@ public class DemoTestFileGeneratorGUI implements Initializable {
 						customerIdentifier.setDisable(true);
 						userIdentifier.setDisable(true);
 						divisionIdentifier.setDisable(true);
+						System.out.println(demoValues.getDemoOrgnaizationNumber());
 
 					} else {
 						AliasTextEnc.setText("");
@@ -439,16 +440,23 @@ public class DemoTestFileGeneratorGUI implements Initializable {
 
 					uvg.setSignkeystorePwd(SignkcsPassword.getText());
 					uvg.setAliasSign(AliasTextSign.getText());
-					if (senderOrg.getText() == null || senderOrg.getText().equalsIgnoreCase("")) {
-						senderOrg.setText(demoValues.getDemoOrgnaizationNumber());
-
-					} else {
-
-					}
-					if (recieverOrg.getText() == null || recieverOrg.getText().equalsIgnoreCase("")) {
-						recieverOrg.setText(demoValues.getDemoOrgnaizationNumber());
-
-					}
+					
+					  if (senderOrg.getText() == null || senderOrg.getText().equalsIgnoreCase(""))
+					  { logger.log(Level.WARNING,
+					  "Sender Organization is null: setting default :"+demoValues.
+					  getDemoOrgnaizationNumber());
+					  senderOrg.setText(demoValues.getDemoOrgnaizationNumber());
+					  
+					} /*
+						 * if (recieverOrg.getText() == null ||
+						 * recieverOrg.getText().equalsIgnoreCase("")) { logger.log(Level.WARNING,
+						 * "Reciever Organization is null: setting default :"+demoValues.
+						 * getDemoOrgnaizationNumber());
+						 * recieverOrg.setText(demoValues.getDemoOrgnaizationNumber());
+						 * 
+						 * }
+						 */
+					 
 
 					uvg.setSenderOrg(senderOrg.getText());
 					uvg.setRecOrg(recieverOrg.getText());

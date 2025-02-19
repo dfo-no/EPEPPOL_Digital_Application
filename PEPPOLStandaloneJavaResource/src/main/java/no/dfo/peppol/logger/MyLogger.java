@@ -1,5 +1,6 @@
 package no.dfo.peppol.logger;
 
+import javafx.application.Platform;
 import javafx.scene.control.TextArea;
 
 import java.text.SimpleDateFormat;
@@ -18,7 +19,7 @@ public class MyLogger extends Handler {
     public void publish(LogRecord record) {
         String message = record.getMessage();
         // Append the log message to the TextArea
-        logTextArea.appendText(record.getLevel()+" : "+message + "\n");
+       Platform.runLater( () -> logTextArea.appendText(record.getLevel()+" : "+message + "\n"));
     }
 
     @Override

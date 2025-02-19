@@ -182,20 +182,33 @@ public class PeppolOutbound {
 			Log.info("[" + uv.getFilename() + "_" + uvg.getTimestamp() + "]" + " MessageID " + messageId);
 
 			// get SWIFT Code/BIC from pain.001
-			list = doc.getElementsByTagNameNS("*", "BIC");
 			try {
-				bic = list.item(0).getTextContent();
-				orgnr = this.getOrgnrForBIC(bic, SwiftOrgnrPairs);
-				uvg.setRecOrg(orgnr.split(":")[1]);
-				Log.info("[" + uv.getFilename() + "_" + uvg.getTimestamp() + "]" + "BIC  Found BIC=" + bic
-						+ ",Org Number=" + orgnr);
-				uvg.getRecOrgFX().setText(uvg.getRecOrg());
+				if(!uvg.getRecOrg().equalsIgnoreCase("") ) {
+					
+					uvg.getRecOrgFX().setText(uvg.getRecOrg());
+					bic = uvg.getRecOrg();
+					orgnr = "0192:" + uvg.getRecOrg();
+					Log.info("[" + uv.getFilename() + "_" + uvg.getTimestamp() + "]" + "User Receiver Organization found:" 
+							+ "Org Number=" + uvg.getRecOrg());
+					
+				}else {
+					
+					list = doc.getElementsByTagNameNS("*", "BIC");
+					bic = list.item(0).getTextContent();
+					orgnr = this.getOrgnrForBIC(bic, SwiftOrgnrPairs);
+					uvg.setRecOrg(orgnr.split(":")[1]);
+					Log.info("[" + uv.getFilename() + "_" + uvg.getTimestamp() + "]" + "BIC  Found BIC=" + bic
+							+ ",Org Number=" + orgnr);
+					uvg.getRecOrgFX().setText(uvg.getRecOrg());
+					
+				}
+				
+				
 
 			} catch (NullPointerException nullEx) {
-				Log.warning("[" + uv.getFilename() + "_" + uvg.getTimestamp() + "]"
-						+ "BIC Not Found in message Replacing with User Value:" + uvg.getRecOrg());
-				bic = uvg.getRecOrg();
-				orgnr = "0192:" + uvg.getRecOrg();
+				Log.severe("[" + uv.getFilename() + "_" + uvg.getTimestamp() + "]"
+						+ "Receiver Org not found in BIC code and User entered field" + uvg.getRecOrg());
+				throw new PeppolGeneralExceptions("Receiver Org not found in BIC code and User entered field : Please provide Receiver Organization number above");
 			}
 
 			String timeStamp = new SimpleDateFormat("ddMMYYYYHHmmsssss").format(new java.util.Date());

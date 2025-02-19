@@ -38,7 +38,7 @@
 				<Label styleClass="label-style" text="Decryption Keystore" />
 				<Button fx:id="DecryptionKeystore" mnemonicParsing="false" text="Select file..." />
 				<Label fx:id="fileForPKCSStore" styleClass="label-style" text="no file selected" />
-				<Label styleClass="warningLabel"  text="Select P12 Keystore for decryption of encrpyted Inner ASiC "  />
+				<Label styleClass="warningLabel"  text="Select P12 Keystore for decryption of encrpyted Inner ASiC (For demo encryption keystore  Alias=demoenc ,Password=123456) "  />
 			</children>
 		</HBox>
 		<HBox fx:id="DecryptPkcsPassword" styleClass="hbox-style" visible="true">

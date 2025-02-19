@@ -60,11 +60,11 @@
 		
 		<HBox styleClass="hbox-style">
 			<children>
-				<Label styleClass="label-style" text="Select Certificate to use" />
+				<Label styleClass="label-style" text="Select keystore (p12) to use" />
 				<fx:define>
 				  <ToggleGroup fx:id="CertificateCategory" />  
 				</fx:define>
-				<RadioButton fx:id="CertificateDemoRadio" mnemonicParsing="false" text="Use Demo Certificate for Signing and Encryption" toggleGroup="$CertificateCategory" />
+				<RadioButton fx:id="CertificateDemoRadio" mnemonicParsing="false" text="Use demo private key for signing/encryption " toggleGroup="$CertificateCategory" />
 				<RadioButton fx:id="CertificateManualRadio" mnemonicParsing="false" text="Choose own public key" toggleGroup="$CertificateCategory" />
 				<Label styleClass="warningLabel"  text="Demo Certificate is used when actual certificate are not available.Own Keystore is the actual p12 keystore,BCP Cert or X509 Cert which has Public and Private key within alias."  />
 			</children>
@@ -123,7 +123,7 @@
 				<Label fx:id="EncKeystoreLabelID" styleClass="label-style" text="Encryption Keystore" />
 				<Button fx:id="EncryptionKeystore" mnemonicParsing="false" text="Select file..." />
 				<Label fx:id="fileForPKCSStoreEnc" styleClass="label-style" text="no file selected" />
-				<Label styleClass="warningLabel"  text="Select P12 Keystore for Encryption "  />
+				<Label styleClass="warningLabel"  text="Select P12 Keystore for Encryption (For demo encryption keystore  Alias=demoenc ,Password=123456)"  />
 			</children>
 		</HBox>
 		<HBox fx:id="EncryptPkcsPassword" styleClass="hbox-style" >
@@ -144,7 +144,7 @@
 				<Label styleClass="label-style" text="Signing Keystore" />
 				<Button fx:id="SigningKeystore" mnemonicParsing="false" text="Select file..." />
 				<Label fx:id="fileForPKCSStoreSign" styleClass="label-style" text="no file selected" />
-				<Label styleClass="warningLabel"  text="Select P12 Keystore for Signing "  />
+				<Label styleClass="warningLabel"  text="Select P12 Keystore for Signing (For demo signing keystore  Alias=demosign ,Password=123456)"  />
 			</children>
 		</HBox>
 		<HBox fx:id="SignPkcsPassword" styleClass="hbox-style" >
