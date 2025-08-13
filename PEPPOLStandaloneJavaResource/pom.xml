@@ -13,7 +13,7 @@
 		<maven.compiler.source>23</maven.compiler.source>
 		<maven.compiler.target>23</maven.compiler.target>
 		<dss.version>6.2.RC1</dss.version>
-		<bouncycastle.version>1.76</bouncycastle.version>
+		<bouncycastle.version>1.78.1</bouncycastle.version>
 		<javafx.version>17</javafx.version>
 		<jakarta.xmlbind.version>3.0.1</jakarta.xmlbind.version>
 		<jakarta.activation.version>2.0.1</jakarta.activation.version>
